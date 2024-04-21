@@ -1,6 +1,6 @@
 import express from "express";
 
-import appRoutes from "./routes/routes.js";
+import appRoutes from "./src/routes/routes.js";
 
 const app = express();
 const port = 3000;
