@@ -2,9 +2,7 @@
 //require("dotenv/config");
 import dotenv from "dotenv";
 
-dotenv.config({ path: "/Users/jelena/Repos/shopAppBE/.env" });
-
-console.log("4 ", process.cwd());
+dotenv.config({ path: "../../../shopAppBE/.env" });
 
 export default {
   development: {
