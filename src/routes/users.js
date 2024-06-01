@@ -5,7 +5,11 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import bodyParser from "body-parser";
 
+import userService from "../services/users.js";
+
 import verifyToken from "../middlewares/authMiddleware.js";
+
+const userServiceInstance = new userService();
 
 const userRouter = express.Router();
 
@@ -27,6 +31,25 @@ const users = [user];
 
 userRouter.use("/profile", verifyToken);
 userRouter.use("/login", bodyParser.json());
+userRouter.use("/register", bodyParser.json());
+
+userRouter.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("hashedPassword: ", hashedPassword);
+    const user = await userServiceInstance.createUser(
+      username,
+      hashedPassword,
+      email
+    );
+
+    res.send({ user });
+  } catch (e) {
+    console.log("error: ", e);
+    return e; //is there something else to do with error???
+  }
+});
 
 userRouter.post("/login", (req, res) => {
   console.log(req.body);
