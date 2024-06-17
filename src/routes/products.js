@@ -1,5 +1,5 @@
-import express from "express";
-import { faker } from "@faker-js/faker";
+const express = require("express");
+const { faker } = require("@faker-js/faker");
 
 const productRouter = express.Router();
 
@@ -29,4 +29,4 @@ productRouter.get("/:product", (req, res) => {
   res.send({ data: JSON.stringify(product) });
 });
 
-export default productRouter;
+module.exports = productRouter;
