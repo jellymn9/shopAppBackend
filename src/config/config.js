@@ -1,10 +1,11 @@
 //import "fs";
 //require("dotenv/config");
-import dotenv from "dotenv";
+//import dotenv from "dotenv";
+require("dotenv").config({ path: "../.env" });
 
-dotenv.config({ path: "../../../shopAppBE/.env" });
+//dotenv.config();
 
-export default {
+module.exports = {
   development: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
