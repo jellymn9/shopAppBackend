@@ -1,17 +1,20 @@
-import express from "express";
-import { faker } from "@faker-js/faker";
-import * as bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import "dotenv/config";
-import bodyParser from "body-parser";
+const express = require("express");
+const { faker } = require("@faker-js/faker");
+//import * as bcrypt from "bcrypt"; //change this
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv/config");
+const bodyParser = require("body-parser");
 
-import userService from "../services/users.js";
+//const userService = require("../services/users.js");
+const UserController = require("../controllers/userController.js");
 
-import verifyToken from "../middlewares/authMiddleware.js";
+const verifyToken = require("../middlewares/authMiddleware.js");
 
-const userServiceInstance = new userService();
+//const userServiceInstance = new userService();
+const userController = new UserController();
 
-const userRouter = express.Router();
+const userRouter = express.Router(); //use Router class later
 
 const user = {
   userId: faker.string.uuid(),
@@ -29,55 +32,17 @@ const profile = {};
 
 const users = [user];
 
+userRouter.route("/login");
+userRouter.route("/register");
+
 userRouter.use("/profile", verifyToken);
-userRouter.use("/login", bodyParser.json());
-userRouter.use("/register", bodyParser.json());
 
-userRouter.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("hashedPassword: ", hashedPassword);
-    const user = await userServiceInstance.createUser(
-      username,
-      hashedPassword,
-      email
-    );
+userRouter.post("/register", userController.registerUser);
 
-    res.send({ user });
-  } catch (e) {
-    console.log("error: ", e);
-    return e; //is there something else to do with error???
-  }
-});
-
-userRouter.post("/login", (req, res) => {
-  console.log(req.body);
-  const { username, password } = req.body;
-  const matchedUser = users.find((u) => u.username === username);
-  console.log("username: ", username);
-  if (!user) {
-  }
-
-  console.log("pass: ", typeof password);
-
-  const passwordMatch = bcrypt.compare(password, user.password);
-  if (!passwordMatch) {
-    res.status(401).json({ error: "Authentication failed" });
-  }
-  const token = jwt.sign(
-    { userId: matchedUser.userId },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "1h",
-    }
-  );
-
-  res.send({ token });
-});
+userRouter.post("/login", userController.loginUser);
 
 userRouter.get("/profile", (req, res) => {
   res.send({ data: profile });
 });
 
-export default userRouter;
+module.exports = userRouter;
