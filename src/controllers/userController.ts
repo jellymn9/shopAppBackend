@@ -1,17 +1,16 @@
-//const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const UserService = require("../services/users.js");
+import UserService from "../services/users";
 
 class UserController {
   userService = new UserService();
 
-  registerUser = async (req, res) => {
+  registerUser = async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
-      //console.log("hashedPassword: ", hashedPassword);
       const user = await this.userService.createUser(
         username,
         hashedPassword,
@@ -19,12 +18,13 @@ class UserController {
       );
 
       res.status(200).send({ user });
-    } catch (e) {
+    } catch (e: any) {
+      //change this later
       res.status(400).send(e?.message); //422 status code could work too
     }
   };
 
-  loginUser = async (req, res) => {
+  loginUser = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
@@ -38,16 +38,17 @@ class UserController {
         {
           userId: user.id,
         },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET || "",
         {
           expiresIn: "1h",
         }
       );
       res.send({ token });
-    } catch (e) {
+    } catch (e: any) {
+      // change type later
       res.status(401).send(e?.message); //check out status code
     }
   };
 }
 
-module.exports = UserController;
+export default UserController;

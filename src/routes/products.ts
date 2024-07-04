@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+
 const express = require("express");
 const { faker } = require("@faker-js/faker");
 
@@ -8,7 +10,7 @@ const productRouter = express.Router();
 //     next()
 //   })
 
-productRouter.get("/", (req, res) => {
+productRouter.get("/", (req: Request, res: Response) => {
   const products = new Array(10).fill({
     // consder using faker multiply instead
     id: faker.string.uuid(),
@@ -19,7 +21,7 @@ productRouter.get("/", (req, res) => {
   res.send({ data: JSON.stringify(products) });
 });
 
-productRouter.get("/:product", (req, res) => {
+productRouter.get("/:product", (req: Request, res: Response) => {
   const product = {
     id: "a501ae48-cd94-427c-8229-0d00a6993228",
     product: faker.commerce.product(),
@@ -29,4 +31,4 @@ productRouter.get("/:product", (req, res) => {
   res.send({ data: JSON.stringify(product) });
 });
 
-module.exports = productRouter;
+export default productRouter;
