@@ -6,15 +6,13 @@
   "scripts": {
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/src/server.js",
+    "start": "node src/server.ts",
     "dev": "nodemon src/server.ts",
-    "nodemon-start": "nodemon dist/src/server.js"
+    "nodemon-start": "nodemon src/server.ts"
   },
   "author": "Jelena Mandzic",
   "license": "ISC",
   "dependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.6",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "eslint": "9.x",
@@ -23,7 +21,9 @@
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -31,8 +31,12 @@
     "@babel/register": "^7.23.7",
     "@eslint/js": "^9.6.0",
     "@faker-js/faker": "^8.3.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.9",
+    "@types/uuid": "^10.0.0",
+    "@types/validator": "^13.12.0",
     "globals": "^15.7.0",
     "sequelize-cli": "^6.6.2",
     "ts-node": "^10.9.2",

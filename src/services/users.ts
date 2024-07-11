@@ -1,5 +1,6 @@
-const db = require("../models/index.js");
-const { v4: uuidv4 } = require("uuid");
+//const db = require("../models/index.js");
+import db from "../models/index";
+import { v4 as uuidv4 } from "uuid";
 
 class UserService {
   createUser = async (username: string, password: string, email: string) => {
@@ -12,6 +13,7 @@ class UserService {
       });
       //console.log("new user entry: ", newEntry);
       return newEntry;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.log("err: ", e?.name);
       if (e?.name === "SequelizeUniqueConstraintError") {
@@ -32,6 +34,7 @@ class UserService {
         throw new Error("User does not exist!");
       }
       return user;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.log("error", e); //Map error later
       throw new Error(e);

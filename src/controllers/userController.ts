@@ -18,6 +18,7 @@ class UserController {
       );
 
       res.status(200).send({ user });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       //change this later
       res.status(400).send(e?.message); //422 status code could work too
@@ -44,6 +45,7 @@ class UserController {
         }
       );
       res.send({ token });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       // change type later
       res.status(401).send(e?.message); //check out status code

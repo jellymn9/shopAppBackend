@@ -1,12 +1,15 @@
-"use strict";
+import fs from "fs";
+import path from "path";
+import { Sequelize } from "sequelize";
+import process from "process";
 
-const fs = require("fs");
-const path = require("path");
-const Sequelize = require("sequelize");
-const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.js")[env];
+//const __dirnameAndConfig = import.meta.dirname + "/../config/config";
+import allConfig from "../config/config";
+
+const config = allConfig[env];
+//const config = require(__dirname + "/../config/config")[env];
 const db = {};
 
 let sequelize;
@@ -47,4 +50,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;
