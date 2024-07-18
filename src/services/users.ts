@@ -1,15 +1,20 @@
 //const db = require("../models/index.js");
-import db from "../models/index";
+//import db from "../models/index";
+import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 class UserService {
+  prisma = new PrismaClient();
+
   createUser = async (username: string, password: string, email: string) => {
     try {
-      const newEntry = await db.User.create({
-        id: uuidv4(),
-        username,
-        password,
-        email,
+      const newEntry = await this.prisma.users.create({
+        data: {
+          id: uuidv4(),
+          username,
+          password,
+          email,
+        },
       });
       //console.log("new user entry: ", newEntry);
       return newEntry;
@@ -27,7 +32,7 @@ class UserService {
 
   getUser = async (username: string) => {
     try {
-      const user = await db.User.findOne({
+      const user = await this.prisma.users.findUnique({
         where: { username: username },
       });
       if (!user) {
