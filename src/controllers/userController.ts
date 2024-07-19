@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import UserService from "../services/users";
+import UserService from "../services/users.ts";
 
 class UserController {
   userService = new UserService();

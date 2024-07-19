@@ -1,5 +1,3 @@
-//const db = require("../models/index.js");
-//import db from "../models/index";
 import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 

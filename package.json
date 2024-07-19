@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.ts",
+    "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
     "nodemon-start": "nodemon src/server.ts"
   },
