@@ -1,7 +1,6 @@
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 
-const express = require("express");
-const { faker } = require("@faker-js/faker");
+import { faker } from "@faker-js/faker";
 
 const productRouter = express.Router();
 
