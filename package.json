@@ -2,29 +2,45 @@
   "name": "shopappbe",
   "version": "1.0.0",
   "description": "Backend for react shop app",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "nodemon-start": "nodemon server.js"
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon src/server.ts",
+    "nodemon-start": "nodemon src/server.ts"
   },
   "author": "Jelena Mandzic",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "5.16.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "eslint": "9.x",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.3",
+    "reflect-metadata": "^0.2.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
     "@babel/register": "^7.23.7",
+    "@eslint/js": "^9.6.0",
     "@faker-js/faker": "^8.3.1",
-    "sequelize-cli": "^6.6.2"
-  }
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.9",
+    "@types/uuid": "^10.0.0",
+    "@types/validator": "^13.12.0",
+    "globals": "^15.7.0",
+    "prisma": "^5.16.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2",
+    "typescript-eslint": "^7.14.1"
+  },
+  "repository": "https://github.com/jellymn9/shopAppBackend"
 }
