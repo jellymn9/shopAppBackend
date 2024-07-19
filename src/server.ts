@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-import routes from "./routes/routes.ts";
+import routes from "./routes/routes";
 
 const app = express();
 const port = 3000;

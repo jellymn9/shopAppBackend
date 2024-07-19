@@ -2,8 +2,8 @@ import express, { Request, Response } from "express";
 // import faker from "@faker-js/faker";
 import "dotenv/config";
 
-import UserController from "../controllers/userController.ts";
-import verifyToken from "../middlewares/authMiddleware.ts";
+import UserController from "../controllers/userController";
+import verifyToken from "../middlewares/authMiddleware";
 
 const userController = new UserController();
 const userRouter = express.Router(); //use Router class later

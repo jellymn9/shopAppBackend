@@ -1,7 +1,6 @@
-import { RoutesT } from "./routesTypes.ts";
-
-import productRouter from "./products.ts";
-import userRouter from "./users.ts";
+import { RoutesT } from "./routesTypes";
+import productRouter from "./products";
+import userRouter from "./users";
 
 const routes: RoutesT = [
   { route: "/products", router: productRouter },
