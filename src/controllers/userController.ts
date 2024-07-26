@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 import userService from "../services/users";
 
-export const registerUser = async (req: Request, res: Response) => {
+const registerUser = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -18,7 +18,7 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-export const loginUser = async (req: Request, res: Response) => {
+const loginUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
@@ -44,3 +44,5 @@ export const loginUser = async (req: Request, res: Response) => {
     res.status(401).send(e?.message); //check out status code
   }
 };
+
+export default { loginUser, registerUser };
