@@ -6,7 +6,7 @@ import UserController from "../controllers/userController";
 import verifyToken from "../middlewares/authMiddleware";
 
 const userController = new UserController();
-const userRouter = express.Router(); //use Router class later
+const userRouter = express.Router();
 
 const profile = {};
 
