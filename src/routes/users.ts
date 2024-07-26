@@ -4,6 +4,7 @@ import "dotenv/config";
 
 import userController from "../controllers/userController";
 import verifyToken from "../middlewares/authMiddleware";
+import { registerDataMiddleware } from "../middlewares/dataMiddleware";
 
 const userRouter = express.Router();
 
@@ -14,7 +15,11 @@ userRouter.route("/register");
 
 userRouter.use("/profile", verifyToken);
 
-userRouter.post("/register", userController.registerUser);
+userRouter.post(
+  "/register",
+  registerDataMiddleware,
+  userController.registerUser
+);
 
 userRouter.post("/login", userController.loginUser);
 
