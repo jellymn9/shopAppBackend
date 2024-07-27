@@ -2,13 +2,12 @@ import { Request, Response, NextFunction } from "express";
 
 import {
   RegisterUserI,
-  // FindDataErrorT,
-  // GenericIdentityFn,
+  DataMiddlewareI,
   LoginUserI,
 } from "../types/reqDataTypes";
 import { isEmpty } from "../utils/validators";
 
-const dataMiddleware = <T>(findError: (data: T) => string | undefined) => {
+const dataMiddleware: DataMiddlewareI = (findError) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const data = req.body;
     const dataError = findError(data);

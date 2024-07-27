@@ -1,3 +1,5 @@
+import { Request, Response, NextFunction } from "express";
+
 export interface RegisterUserI {
   username: string;
   password: string;
@@ -11,8 +13,10 @@ export interface LoginUserI {
 
 export type ReqDataT = RegisterUserI | LoginUserI;
 
-// export type FindDataErrorT = <T>(data: T) => string | undefined;
+export type MiddlewareT = {
+  (req: Request, res: Response, next: NextFunction): void;
+};
 
-// export interface GenericIdentityFn {
-//   <Type>(data: Type): string | undefined;
-// }
+export interface DataMiddlewareI {
+  <T>(findError: (data: T) => string | undefined): MiddlewareT;
+}
