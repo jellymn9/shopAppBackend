@@ -11,8 +11,6 @@ export interface LoginUserI {
   password: string;
 }
 
-// export type ReqDataT = RegisterUserI | LoginUserI;
-
 export type MiddlewareT = {
   (req: Request, res: Response, next: NextFunction): void;
 };
