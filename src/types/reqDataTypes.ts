@@ -15,6 +15,8 @@ export type MiddlewareT = {
   (req: Request, res: Response, next: NextFunction): void;
 };
 
+type FindErrorFunctionT<A> = (a: A) => string | void;
+
 export interface DataMiddlewareI {
-  <T>(findError: (data: T) => string | void): MiddlewareT;
+  <T>(findError: FindErrorFunctionT<T>): MiddlewareT;
 }
