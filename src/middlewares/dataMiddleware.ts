@@ -20,7 +20,6 @@ const dataMiddleware: DataMiddlewareI = (findError) => {
     } catch (e: any) {
       res.status(400).send(e?.message);
     }
-    next();
   };
 };
 
