@@ -43,7 +43,5 @@ function loginUser(loginData: LoginUserI) {
   return;
 }
 
-export const registerDataMiddleware = dataMiddleware<RegisterUserI>(
-  registerUserDataError
-);
+export const registerDataMiddleware = dataMiddleware(registerUserDataError);
 export const loginDataMiddleware = dataMiddleware(loginUser);
