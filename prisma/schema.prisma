@@ -19,3 +19,24 @@ model Users {
   createdAt   DateTime?    @default(now())
   updatedAt   DateTime?   @updatedAt
 }
+
+model Categories {
+  name Category   @unique
+  products Products[]
+}
+
+enum Category {
+  OIL
+  FLORAL_WATER
+  SOAP
+}
+
+model Products {
+  id        String   @id @db.Uuid
+  name String
+  price String
+  image String
+  category Categories @relation(fields:[categoryName], references: [name])
+  categoryName Category
+}
+
