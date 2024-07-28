@@ -1,12 +1,14 @@
 import express, { Request, Response } from "express";
-// import faker from "@faker-js/faker";
 import "dotenv/config";
 
-import UserController from "../controllers/userController";
+import userController from "../controllers/userController";
 import verifyToken from "../middlewares/authMiddleware";
+import {
+  registerDataMiddleware,
+  loginDataMiddleware,
+} from "../middlewares/dataMiddleware";
 
-const userController = new UserController();
-const userRouter = express.Router(); //use Router class later
+const userRouter = express.Router();
 
 const profile = {};
 
@@ -15,9 +17,13 @@ userRouter.route("/register");
 
 userRouter.use("/profile", verifyToken);
 
-userRouter.post("/register", userController.registerUser);
+userRouter.post(
+  "/register",
+  registerDataMiddleware,
+  userController.registerUser
+);
 
-userRouter.post("/login", userController.loginUser);
+userRouter.post("/login", loginDataMiddleware, userController.loginUser);
 
 userRouter.get("/profile", (req: Request, res: Response) => {
   res.send({ data: profile });
