@@ -24,7 +24,6 @@ const createUser = async (
     console.log("err: ", e?.name);
     if (e?.name === "SequelizeUniqueConstraintError") {
       //change this
-      // get to know more about sequalize errors
       const uniqueUsernameErr = new Error("Username must be unique!");
       throw uniqueUsernameErr;
     }
