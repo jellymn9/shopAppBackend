@@ -7,6 +7,7 @@ async function main() {
   //users
   const dummyPassword = "asdf_asdf";
   const hashedPassword = await bcrypt.hash(dummyPassword, 10);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const alice = await prisma.users.upsert({
     where: { email: "jeca@jeca.com" },
     update: {},
@@ -17,6 +18,7 @@ async function main() {
       password: hashedPassword,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const bob = await prisma.users.upsert({
     where: { email: "bob@bob.io" },
     update: {},
@@ -27,13 +29,14 @@ async function main() {
       password: hashedPassword,
     },
   });
-  console.log({ alice, bob });
   //categories
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const categories = await prisma.categories.createMany({
     data: [{ name: "FLORAL_WATER" }, { name: "OIL" }, { name: "SOAP" }],
     skipDuplicates: true,
   });
   //products
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const lavanderOil = await prisma.products.upsert({
     where: { id: "9ecacacc-9cef-4ef0-ab5d-d8f0ba0338a5" },
     update: {},
@@ -49,9 +52,30 @@ async function main() {
       },
     },
   });
-  console.log({ lavanderOil });
+  //ProductTypes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const productTypes = await prisma.productTypes.createMany({
+    data: [
+      { name: "SCRUBS_AND_MASKS" },
+      { name: "NATURAL_DEODORANTS" },
+      { name: "HAIR_OILD_AND_SERUMS" },
+      { name: "SOLID_SHAMPOOS_AND_HAIR_SOAPS" },
+      { name: "EAU_DE_TOILETE" },
+    ],
+    skipDuplicates: true,
+  });
 
-  console.log({ categories });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const tags = await prisma.tags.createMany({
+    data: [
+      { name: "VEGAN_COSMETICS" },
+      { name: "ORGANIC_COSMETICS" },
+      { name: "HANDMADE_COSMETICS" },
+      { name: "SUMMER_ESSENTIALS" },
+      { name: "GIFTS" },
+    ],
+    skipDuplicates: true,
+  });
 }
 
 main()

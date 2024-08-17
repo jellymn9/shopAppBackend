@@ -31,6 +31,27 @@ enum Category {
   SOAP
 }
 
+enum ProductType {
+  SCRUBS_AND_MASKS
+  NATURAL_DEODORANTS
+  HAIR_OILD_AND_SERUMS
+  SOLID_SHAMPOOS_AND_HAIR_SOAPS
+  EAU_DE_TOILETE
+}
+
+enum Tag {
+  VEGAN_COSMETICS
+  ORGANIC_COSMETICS
+  HANDMADE_COSMETICS
+  SUMMER_ESSENTIALS
+  GIFTS
+}
+
+model ProductTypes {
+  name ProductType @unique
+  products Products[]
+}
+
 model Products {
   id        String   @id @db.Uuid
   name String
@@ -38,5 +59,23 @@ model Products {
   image String
   category Categories @relation(fields:[categoryName], references: [name])
   categoryName Category
+  productType ProductTypes @relation(fields:[productTypeName], references: [name])
+  productTypeName ProductType @default(SCRUBS_AND_MASKS)
+  tags TagsOnProducts[]
+}
+
+model Tags {
+  name        Tag   @id
+  products TagsOnProducts[]
+}
+
+model TagsOnProducts {
+  tag       Tags     @relation(fields: [tagId], references: [name])
+  tagId     Tag // relation scalar field (used in the `@relation` attribute above)
+  product   Products @relation(fields: [productId], references: [id])
+  productId String @db.Uuid
+  createdAt DateTime @default(now())
+
+  @@id([tagId, productId])
 }
 
