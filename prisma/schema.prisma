@@ -29,6 +29,7 @@ enum Category {
   OIL
   FLORAL_WATER
   SOAP
+  CREAM
 }
 
 enum ProductType {
