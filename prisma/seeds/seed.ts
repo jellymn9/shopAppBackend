@@ -127,6 +127,32 @@ async function main() {
     ],
     skipDuplicates: true,
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const tagsOnProducts = await prisma.tagsOnProducts.createMany({
+    data: [
+      {
+        tagId: "VEGAN_COSMETICS",
+        productId: "ce88cfed-0343-4206-8d64-68b43059e209",
+      },
+      {
+        tagId: "ORGANIC_COSMETICS",
+        productId: "ce88cfed-0343-4206-8d64-68b43059e209",
+      },
+      {
+        tagId: "ORGANIC_COSMETICS",
+        productId: "011fda23-ea15-4543-9a13-6b932c8c0676",
+      },
+      {
+        tagId: "HANDMADE_COSMETICS",
+        productId: "011fda23-ea15-4543-9a13-6b932c8c0676",
+      },
+      {
+        tagId: "SUMMER_ESSENTIALS",
+        productId: "011fda23-ea15-4543-9a13-6b932c8c0676",
+      },
+    ],
+    skipDuplicates: true,
+  });
 }
 
 main()
