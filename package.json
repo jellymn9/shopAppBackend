@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
-    "nodemon-start": "nodemon src/server.ts"
+    "nodemon-start": "nodemon src/server.ts",
+    "seed": "ts-node prisma/seeds/seed.ts",
+    "migrate-dev": "npx prisma migrate dev"
   },
   "author": "Jelena Mandzic",
   "license": "ISC",
