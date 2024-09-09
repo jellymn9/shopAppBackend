@@ -2,14 +2,25 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-let pageBookmark: string;
+(async function () {
+  const userId = (
+    await prisma.products.findFirst({
+      select: { id: true },
+      orderBy: { id: "asc" },
+    })
+  )?.id;
+  pageBookmark = userId;
+})();
 
-const readProducts = async (isForward: boolean) => {
-  const pageSize = isForward ? 4 : -4;
-  const skip = pageBookmark ? 1 : 0;
+let pageBookmark: string | undefined;
+let skip: [number, number] = [0, 0]; // [forwardSkip, backwardSkip]
+
+const readProducts = async (isForward: boolean, pageSize = 2) => {
+  const pageSizeWithDirection = isForward ? pageSize : -pageSize;
+
   const products = await prisma.products.findMany({
-    take: pageSize,
-    skip: skip,
+    take: pageSizeWithDirection,
+    skip: isForward ? skip[0] : skip[1],
     cursor: {
       id: pageBookmark,
     },
@@ -17,7 +28,12 @@ const readProducts = async (isForward: boolean) => {
       id: "asc",
     },
   });
-  pageBookmark = products?.[pageSize - 1].id;
+
+  const productsLength = products?.length;
+  if (productsLength) {
+    pageBookmark = products?.[productsLength - 1]?.id;
+    skip = [1, productsLength];
+  }
 
   return products;
 };
