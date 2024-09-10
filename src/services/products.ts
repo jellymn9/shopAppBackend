@@ -5,17 +5,18 @@ const prisma = new PrismaClient();
 let pageBookmark: string | undefined;
 let skip: [number, number] = [0, 0]; // [forwardSkip, backwardSkip]
 
+async function findFirstProduct(): Promise<{ id: string } | null> {
+  return await prisma.products.findFirst({
+    select: { id: true },
+    orderBy: { id: "asc" },
+  });
+}
+
 const readProducts = async (isForward: boolean, pageSize = 2) => {
   const pageSizeWithDirection = isForward ? pageSize : -pageSize;
   const skipForDirection = isForward ? skip[0] : skip[1];
-
   if (!pageBookmark) {
-    pageBookmark = (
-      await prisma.products.findFirst({
-        select: { id: true },
-        orderBy: { id: "asc" },
-      })
-    )?.id;
+    pageBookmark = (await findFirstProduct())?.id;
   }
   const products = await prisma.products.findMany({
     take: pageSizeWithDirection,
