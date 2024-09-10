@@ -15,27 +15,45 @@ async function findFirstProduct(): Promise<{ id: string } | null> {
 const readProducts = async (isForward: boolean, pageSize = 2) => {
   const pageSizeWithDirection = isForward ? pageSize : -pageSize;
   const skipForDirection = isForward ? skip[0] : skip[1];
-  if (!pageBookmark) {
-    pageBookmark = (await findFirstProduct())?.id;
-  }
-  const products = await prisma.products.findMany({
-    take: pageSizeWithDirection,
-    skip: skipForDirection,
-    cursor: {
-      id: pageBookmark,
-    },
-    orderBy: {
-      id: "asc",
-    },
-  });
+  try {
+    if (!pageBookmark) {
+      pageBookmark = (await findFirstProduct())?.id;
+    }
 
-  const productsLength = products?.length;
-  if (productsLength) {
-    pageBookmark = products?.[productsLength - 1]?.id;
-    skip = [1, productsLength];
-  }
+    const products = await prisma.products.findMany({
+      take: pageSizeWithDirection,
+      skip: skipForDirection,
+      cursor: {
+        id: pageBookmark,
+      },
+      orderBy: {
+        id: "asc",
+      },
+    });
 
-  return products;
+    const productsLength = products?.length;
+    if (productsLength) {
+      pageBookmark = products?.[productsLength - 1]?.id;
+      skip = [1, productsLength];
+    }
+
+    return products;
+  } catch (e) {
+    throw new Error("error occured");
+  }
 };
 
-export default { readProducts };
+const readProduct = async (id: string) => {
+  try {
+    const product = await prisma.products.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return product;
+  } catch (e) {
+    throw new Error("error occured!");
+  }
+};
+
+export default { readProducts, readProduct };
