@@ -14,7 +14,7 @@ const getProducts = async (req: Request, res: Response) => {
 };
 
 const getProduct = async (req: Request, res: Response) => {
-  const { id } = req.params; //Not in body but  /:product
+  const { id } = req.params;
   try {
     const product = await productService.readProduct(id);
 
