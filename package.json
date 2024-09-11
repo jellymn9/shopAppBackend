@@ -25,7 +25,8 @@
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
