@@ -8,27 +8,22 @@ const createUser = async (
   password: string,
   email: string
 ) => {
-  try {
-    const newEntry = await prisma.users.create({
-      data: {
-        id: uuidv4(),
-        username,
-        password,
-        email,
-      },
-    });
-    //console.log("new user entry: ", newEntry);
-    return newEntry;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    console.log("err: ", e?.name);
-    if (e?.name === "SequelizeUniqueConstraintError") {
-      //change this
-      const uniqueUsernameErr = new Error("Username must be unique!");
-      throw uniqueUsernameErr;
-    }
-    throw new Error("Error occurred!");
-  }
+  //try {
+  const newEntry = await prisma.users.create({
+    data: {
+      id: uuidv4(),
+      username,
+      password,
+      email,
+    },
+  });
+  //console.log("new user entry: ", newEntry);
+  return newEntry;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // } catch (e: any) {
+  //   console.log("err: ", e);
+  //   throw new Error("Error occurred!");
+  // }
 };
 
 const getUser = async (username: string) => {

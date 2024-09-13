@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 
+import mainErrorMiddleware from "./middlewares/errorMiddleware";
 import routes from "./routes/routes";
 
 const app = express();
@@ -15,3 +16,5 @@ routes.forEach((router) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+app.use(mainErrorMiddleware);

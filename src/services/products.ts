@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { CustomError } from "../utils/errorHandlers/errorHandler";
 
 const prisma = new PrismaClient();
 
@@ -44,16 +45,22 @@ const readProducts = async (isForward: boolean, pageSize = 2) => {
 };
 
 const readProduct = async (id: string) => {
-  try {
-    const product = await prisma.products.findUnique({
-      where: {
-        id: id,
-      },
-    });
-    return product;
-  } catch (e) {
-    throw new Error("error occured!");
+  //try {
+  const product = await prisma.products.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!product) {
+    throw new Error("Product does not exist!");
   }
+
+  return product;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // } catch (e: any) {
+  //   throw new Error(e?.message);
+  // }
 };
 
 export default { readProducts, readProduct };

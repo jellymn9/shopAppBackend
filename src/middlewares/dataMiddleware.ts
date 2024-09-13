@@ -5,6 +5,7 @@ import {
   isInvalidPassword,
   isInvalidUsername,
 } from "../utils/validators";
+import { CustomError } from "../utils/errorHandlers/errorHandler";
 import {
   RegisterUserI,
   DataMiddlewareI,
@@ -22,7 +23,8 @@ const dataMiddleware: DataMiddlewareI = (findError) => {
       next();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      res.status(400).send(e);
+      // res.status(400).send(e);
+      next(new CustomError(e.message, 400));
     }
   };
 };
