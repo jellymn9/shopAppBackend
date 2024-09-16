@@ -44,22 +44,23 @@ const readProducts = async (isForward = true, pageSize = 2) => {
 };
 
 const readProduct = async (id: string) => {
-  //try {
-  const product = await prisma.products.findUnique({
-    where: {
-      id: id,
-    },
-  });
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const product = await prisma.products.findUnique({
+      where: {
+        id: id,
+      },
+    });
 
-  if (!product) {
-    throw new Error("Product does not exist!");
+    if (!product) {
+      throw new Error("Product does not exist!");
+    }
+
+    return product;
+  } catch (e) {
+    console.log("Run from service!");
+    throw new Error("Test!  ");
   }
-
-  return product;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // } catch (e: any) {
-  //   throw new Error(e?.message);
-  // }
 };
 
 export default { readProducts, readProduct };

@@ -6,10 +6,10 @@ import { ControllerFnT } from "../types/types";
 const controllerWrapper = (fn: ControllerFnT) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      fn(req, res);
+      await fn(req, res);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      next(new CustomError(e.message, 400));
+      next(new CustomError(e?.message || "test", 400));
     }
   };
 };
