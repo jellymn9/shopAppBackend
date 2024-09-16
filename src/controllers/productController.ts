@@ -8,9 +8,7 @@ const controllerWrapper = (fn: ControllerFnT) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await fn(req, res);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: unknown) {
-      //console.log("ERROR !:", e);
       next(new CustomError(errorMapper(e), 400));
     }
   };
