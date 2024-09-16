@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { CustomError } from "../utils/errorHandlers/errorHandler";
 
 const prisma = new PrismaClient();
 
@@ -13,7 +12,7 @@ async function findFirstProduct(): Promise<{ id: string } | null> {
   });
 }
 
-const readProducts = async (isForward: boolean, pageSize = 2) => {
+const readProducts = async (isForward = true, pageSize = 2) => {
   const pageSizeWithDirection = isForward ? pageSize : -pageSize;
   const skipForDirection = isForward ? skip[0] : skip[1];
   try {

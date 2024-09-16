@@ -1,32 +1,29 @@
 import { Request, Response, NextFunction } from "express";
 import productService from "../services/products";
 import { CustomError } from "../utils/errorHandlers/errorHandler";
+import { ControllerFnT } from "../types/types";
 
-const getProducts = async (req: Request, res: Response, next: NextFunction) => {
+const controllerWrapper = (fn: ControllerFnT) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      fn(req, res);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      next(new CustomError(e.message, 400));
+    }
+  };
+};
+
+const getProducts = controllerWrapper(async (req: Request, res: Response) => {
   const { isForward, page } = req.body;
-  try {
-    const products = await productService.readProducts(isForward, page);
+  const products = await productService.readProducts(isForward, page);
+  res.status(200).send({ products });
+});
 
-    res.status(200).send({ products });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    next(e);
-    //res.status(400).send(e?.message);
-  }
-};
-
-const getProduct = async (req: Request, res: Response, next: NextFunction) => {
+const getProduct = controllerWrapper(async (req: Request, res: Response) => {
   const { id } = req.params;
-  try {
-    const product = await productService.readProduct(id);
-
-    res.status(200).send({ product });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    //res.status(400).send(e?.message);
-    //console.log("blaaaaa");
-    next(new CustomError(e.message, 400));
-  }
-};
+  const product = await productService.readProduct(id);
+  res.status(200).send({ product });
+});
 
 export default { getProducts, getProduct };

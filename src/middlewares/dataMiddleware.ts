@@ -14,7 +14,7 @@ import {
 
 const dataMiddleware: DataMiddlewareI = (findError) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const data = req.body;
+    const data = req.body; // include params!
     const dataError = findError(data);
     try {
       if (dataError) {
@@ -23,7 +23,6 @@ const dataMiddleware: DataMiddlewareI = (findError) => {
       next();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      // res.status(400).send(e);
       next(new CustomError(e.message, 400));
     }
   };
