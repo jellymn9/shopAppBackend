@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import productService from "../services/products";
 import { CustomError } from "../utils/errorHandlers/errorHandler";
 import { ControllerFnT } from "../types/types";
+import { errorMapper } from "../utils/errorHandlers/errorHandler";
 
 const controllerWrapper = (fn: ControllerFnT) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -9,7 +10,8 @@ const controllerWrapper = (fn: ControllerFnT) => {
       await fn(req, res);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      next(new CustomError(e?.message || "test", 400));
+      //console.log("ERROR !:", e);
+      next(new CustomError(errorMapper(e), 400));
     }
   };
 };
