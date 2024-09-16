@@ -15,6 +15,7 @@ export default (
     err.statusCode < 500
   ) {
     res.status(err.statusCode).send(err.message);
+    return;
   }
   console.error("main error middleware:", err);
   res.status(500).send("Something broke!");
