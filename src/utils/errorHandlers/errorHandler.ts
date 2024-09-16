@@ -7,12 +7,15 @@ export class CustomError extends Error {
   }
 }
 
-export const errorMapper = (e: Error): string => {
+export const errorMapper = (e: unknown): string => {
   if (e instanceof Prisma.PrismaClientKnownRequestError) {
     return JSON.stringify(e?.meta?.message);
   }
   // if (e instanceof Prisma.PrismaClientUnknownRequestError) {
   //   return "Unknown error occured";
   // }
-  return e?.message || "Error occured";
+  if (e instanceof Error) {
+    return e?.message;
+  }
+  return "Unknown error!";
 };

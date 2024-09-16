@@ -9,7 +9,7 @@ const controllerWrapper = (fn: ControllerFnT) => {
     try {
       await fn(req, res);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (e: any) {
+    } catch (e: unknown) {
       //console.log("ERROR !:", e);
       next(new CustomError(errorMapper(e), 400));
     }
