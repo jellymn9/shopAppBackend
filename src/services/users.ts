@@ -8,7 +8,6 @@ const createUser = async (
   password: string,
   email: string
 ) => {
-  //try {
   const newEntry = await prisma.users.create({
     data: {
       id: uuidv4(),
@@ -17,29 +16,17 @@ const createUser = async (
       email,
     },
   });
-  //console.log("new user entry: ", newEntry);
   return newEntry;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // } catch (e: any) {
-  //   console.log("err: ", e);
-  //   throw new Error("Error occurred!");
-  // }
 };
 
 const getUser = async (username: string) => {
-  try {
-    const user = await prisma.users.findUnique({
-      where: { username: username },
-    });
-    if (!user) {
-      throw new Error("User does not exist!");
-    }
-    return user;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    console.log("error", e); //Map error later
-    throw new Error(e);
+  const user = await prisma.users.findUnique({
+    where: { username: username },
+  });
+  if (!user) {
+    throw new Error("User does not exist!");
   }
+  return user;
 };
 
 export default { getUser, createUser };

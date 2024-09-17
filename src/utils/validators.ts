@@ -1,4 +1,5 @@
 import { validate } from "validate.js";
+import { validate as isValidUUID } from "uuid";
 
 const constraints = {
   username: {
@@ -31,4 +32,8 @@ export const isInvalidPassword = function (password: string) {
 
 export const isInvalidUsername = function (username: string) {
   return validate({ username }, constraints);
+};
+
+export const isInvalidId = function (id: string) {
+  return isValidUUID(id) ? undefined : { message: "Invalid id type!" };
 };
