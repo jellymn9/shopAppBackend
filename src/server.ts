@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+//import { boolParser } from "express-query-boolean";
 
 import mainErrorMiddleware from "./middlewares/errorMiddleware";
 import routes from "./routes/routes";
@@ -8,6 +9,7 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+//app.use(boolParser());
 
 routes.forEach((router) => {
   app.use(router.route, router.router); //check if routers can be used with app.use in a different way

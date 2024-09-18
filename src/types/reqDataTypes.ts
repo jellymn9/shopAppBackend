@@ -24,6 +24,6 @@ type FindErrorFunctionT<A> = (a: A) => { message: string } | void;
 export interface DataMiddlewareI {
   <T>(
     findError: FindErrorFunctionT<T>,
-    dataSource?: "body" | "params"
+    dataSource?: "body" | "params" | "query"
   ): MiddlewareT;
 }

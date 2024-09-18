@@ -40,8 +40,6 @@ const readProducts = async (isForward = true, pageSize = 2) => {
 };
 
 const readProduct = async (id: string) => {
-  // eslint-disable-next-line no-useless-catch
-  //try {
   const product = await prisma.products.findUnique({
     where: {
       id: id,
@@ -53,10 +51,6 @@ const readProduct = async (id: string) => {
   }
 
   return product;
-  // } catch (e) {
-  //   console.log("Run from service!");
-  //   throw new Error("Test!  ");
-  // }
 };
 
 export default { readProducts, readProduct };
