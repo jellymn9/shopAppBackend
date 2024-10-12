@@ -4,11 +4,13 @@ import productService from "../services/products";
 import { controllerWrapper } from "../utils/errorHandler";
 
 const getProducts = controllerWrapper(async (req: Request, res: Response) => {
-  const { isForward, page } = req.query;
+  const { isForward, page, skip, cursor } = req.query;
   const products = await productService.readProducts(
     isForward ? Boolean(isForward) : undefined,
-    page ? Number(page) : undefined
-  );
+    page ? Number(page) : undefined,
+    skip ? [Number(Array(skip)[0]), Number(Array(skip)[1])] : undefined,
+    cursor ? String(cursor) : undefined
+  ); // CHANGE THIS!
   res.status(200).send({ products });
 });
 

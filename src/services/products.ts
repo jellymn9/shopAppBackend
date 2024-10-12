@@ -2,28 +2,30 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-let pageBookmark: string | undefined;
-let skip: [number, number] = [0, 0]; // [forwardSkip, backwardSkip]
-
 async function findFirstProduct(): Promise<{ id: string } | null> {
   return await prisma.products.findFirst({
     select: { id: true },
-    orderBy: { id: "asc" },
+    orderBy: { id: "asc" }, // change to timestamp
   });
 }
 
-const readProducts = async (isForward = true, pageSize = 6) => {
+const readProducts = async (
+  isForward = true,
+  pageSize = 6,
+  skip = [0, 0], // [forwardSkip, backwardSkip]
+  cursor?: string
+) => {
   const pageSizeWithDirection = isForward ? pageSize : -pageSize;
   const skipForDirection = isForward ? skip[0] : skip[1];
-  if (!pageBookmark) {
-    pageBookmark = (await findFirstProduct())?.id;
+  if (!cursor) {
+    cursor = (await findFirstProduct())?.id;
   }
 
   const products = await prisma.products.findMany({
     take: pageSizeWithDirection,
     skip: skipForDirection,
     cursor: {
-      id: pageBookmark,
+      id: cursor,
     },
     orderBy: {
       id: "asc",
@@ -32,11 +34,11 @@ const readProducts = async (isForward = true, pageSize = 6) => {
 
   const productsLength = products?.length;
   if (productsLength) {
-    pageBookmark = products?.[productsLength - 1]?.id;
+    cursor = products?.[productsLength - 1]?.id;
     skip = [1, productsLength];
   }
 
-  return products;
+  return { products, cursor, skip };
 };
 
 const readProduct = async (id: string) => {
