@@ -2,19 +2,17 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//let pageBookmark: string | undefined;
-let skip: [number, number] = [0, 0]; // [forwardSkip, backwardSkip]
-
 async function findFirstProduct(): Promise<{ id: string } | null> {
   return await prisma.products.findFirst({
     select: { id: true },
-    orderBy: { id: "asc" },
+    orderBy: { id: "asc" }, // change to timestamp
   });
 }
 
 const readProducts = async (
   isForward = true,
   pageSize = 6,
+  skip = [0, 0], // [forwardSkip, backwardSkip]
   cursor?: string
 ) => {
   const pageSizeWithDirection = isForward ? pageSize : -pageSize;
@@ -40,7 +38,7 @@ const readProducts = async (
     skip = [1, productsLength];
   }
 
-  return { products, cursor };
+  return { products, cursor, skip };
 };
 
 const readProduct = async (id: string) => {
