@@ -20,6 +20,7 @@ export const errorMapper = (e: unknown) => {
   //   return "Unknown error occured";
   // }
   if (e instanceof Error) {
+    // cover real error cases...
     return e?.message;
   }
   return "Unknown error!";

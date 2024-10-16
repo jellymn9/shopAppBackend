@@ -5,6 +5,10 @@ import {
   isInvalidPassword,
   isInvalidUsername,
   isInvalidId,
+  isInvalidIsForward,
+  isInvalidPage,
+  isInvalidSkip,
+  isInvalidCursor,
 } from "../utils/validators";
 import { CustomError } from "../utils/errorHandler";
 import {
@@ -12,6 +16,7 @@ import {
   DataMiddlewareI,
   LoginUserI,
   GetProductI,
+  GetProductsI,
 } from "../types/reqDataTypes";
 
 const dataMiddleware: DataMiddlewareI = (findError, dataSource = "body") => {
@@ -39,12 +44,6 @@ function registerUserDataError({ username, password, email }: RegisterUserI) {
 }
 
 function loginUser({ username, password }: LoginUserI) {
-  console.log(
-    "passs: ",
-    isInvalidPassword(password)?.password,
-    "username: ",
-    isInvalidUsername(username)?.username
-  );
   return (
     isInvalidPassword(password)?.password ||
     isInvalidUsername(username)?.username
@@ -55,6 +54,16 @@ function getProduct({ id }: GetProductI) {
   return isInvalidId(id);
 }
 
+function getProducts({ isForward, page, skip, cursor }: GetProductsI) {
+  return (
+    isInvalidIsForward(isForward) ||
+    isInvalidPage(page) ||
+    isInvalidSkip(skip) ||
+    isInvalidCursor(cursor)
+  );
+}
+
 export const registerDataMiddleware = dataMiddleware(registerUserDataError);
 export const loginDataMiddleware = dataMiddleware(loginUser);
 export const getProductMiddleware = dataMiddleware(getProduct, "params");
+export const getProductsMiddleware = dataMiddleware(getProducts, "query");

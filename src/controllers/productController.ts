@@ -6,7 +6,7 @@ import { controllerWrapper } from "../utils/errorHandler";
 const getProducts = controllerWrapper(async (req: Request, res: Response) => {
   const { isForward, page, skip, cursor } = req.query;
   const products = await productService.readProducts(
-    isForward ? Boolean(isForward) : undefined,
+    !!isForward,
     page ? Number(page) : undefined,
     skip ? [Number(Array(skip)[0]), Number(Array(skip)[1])] : undefined,
     cursor ? String(cursor) : undefined

@@ -15,6 +15,13 @@ export interface GetProductI {
   id: string;
 }
 
+export interface GetProductsI {
+  isForward: string;
+  page: string;
+  skip: string;
+  cursor: string;
+}
+
 export type MiddlewareT = {
   (req: Request, res: Response, next: NextFunction): void;
 };
