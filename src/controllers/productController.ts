@@ -2,15 +2,17 @@ import { Request, Response } from "express";
 
 import productService from "../services/products";
 import { controllerWrapper } from "../utils/errorHandler";
+import { mapElementsToNumbers } from "../utils/helpers";
 
 const getProducts = controllerWrapper(async (req: Request, res: Response) => {
   const { isForward, page, skip, cursor } = req.query;
+
   const products = await productService.readProducts(
     !!isForward,
-    page ? Number(page) : undefined,
-    skip ? [Number(Array(skip)[0]), Number(Array(skip)[1])] : undefined,
-    cursor ? String(cursor) : undefined
-  ); // CHANGE THIS!
+    Number(page),
+    mapElementsToNumbers(skip as Array<string>),
+    cursor && String(cursor)
+  );
   res.status(200).send({ products });
 });
 

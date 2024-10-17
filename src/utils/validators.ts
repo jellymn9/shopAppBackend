@@ -55,15 +55,25 @@ export const isInvalidPage = function (page: string) {
 
 export const isInvalidSkip = function (skip: unknown) {
   if (skip instanceof Array) {
-    return validate({ skipElements: skip[0] }, productConstraints) &&
+    return (
+      (skip.length !== 2 && { message: "Invalid skip elements type" }) ||
+      validate({ skipElements: skip[0] }, productConstraints) ||
       validate({ skipElements: skip[1] }, productConstraints)
-      ? undefined
-      : { message: "Invalid skip elements type" };
+    );
   } else {
     return { message: "Invalid skip type!" };
   }
 };
 
 export const isInvalidCursor = function (cursor: unknown) {
-  return isString(cursor) ? undefined : { message: "Invalid cursor type!" };
+  if (typeof cursor === "string") {
+    if (cursor) {
+      return isValidUUID(cursor)
+        ? undefined
+        : { message: "Invalid cursor UUID value!" };
+    }
+    return undefined;
+  } else {
+    return { message: "Invalid cursor type!" };
+  }
 };
