@@ -11,7 +11,9 @@
     "start-dev": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
     "nodemon-start": "nodemon src/server.ts",
-    "seed": "ts-node prisma/seeds/seed.ts",
+    "seed": "prisma db seed",
+    "postinstall": "prisma generate",
+    "seed-dev": "ts-node prisma/seeds/seed.ts",
     "migrate-dev": "npx prisma migrate dev"
   },
   "author": "Jelena Mandzic",
