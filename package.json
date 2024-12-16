@@ -11,10 +11,11 @@
     "start-dev": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
     "nodemon-start": "nodemon src/server.ts",
-    "seed": "prisma db seed",
     "postinstall": "prisma generate",
-    "seed-dev": "ts-node prisma/seeds/seed.ts",
-    "migrate-dev": "npx prisma migrate dev"
+    "seed-dev": "ts-node src/prisma/seeds/seed.ts",
+    "migrate-dev": "npx prisma migrate dev",
+    "migrate-prod": "npx prisma migrate deploy",
+    "seed-prod": "node dist/src/prisma/seeds/seed.js"
   },
   "author": "Jelena Mandzic",
   "license": "ISC",
