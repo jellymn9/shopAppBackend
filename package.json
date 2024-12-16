@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend for react shop app",
   "main": "dist/server.js",
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
