@@ -40,24 +40,49 @@ async function main() {
     ],
     skipDuplicates: true,
   });
-  //products
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const lavanderOil = await prisma.products.upsert({
-    where: { id: "9ecacacc-9cef-4ef0-ab5d-d8f0ba0338a5" },
-    update: {},
-    create: {
-      id: "9ecacacc-9cef-4ef0-ab5d-d8f0ba0338a5",
-      name: "Lavander oil",
-      price: "234$",
-      image: "some_image",
-      category: {
-        create: {
-          name: "OIL",
-        },
-      },
-    },
+  const tags = await prisma.tags.createMany({
+    data: [
+      { name: "VEGAN_COSMETICS" },
+      { name: "ORGANIC_COSMETICS" },
+      { name: "HANDMADE_COSMETICS" },
+      { name: "SUMMER_ESSENTIALS" },
+      { name: "GIFTS" },
+    ],
+    skipDuplicates: true,
+  });
+
+  //ProductTypes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const productTypes = await prisma.productTypes.createMany({
+    data: [
+      { name: "SCRUBS_AND_MASKS" },
+      { name: "NATURAL_DEODORANTS" },
+      { name: "HAIR_OILD_AND_SERUMS" },
+      { name: "SOLID_SHAMPOOS_AND_HAIR_SOAPS" },
+      { name: "EAU_DE_TOILETE" },
+    ],
+    skipDuplicates: true,
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  //products
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const lavanderOil = await prisma.products.upsert({
+  //   where: { id: "9ecacacc-9cef-4ef0-ab5d-d8f0ba0338a5" },
+  //   update: {},
+  //   create: {
+  //     id: "9ecacacc-9cef-4ef0-ab5d-d8f0ba0338a5",
+  //     name: "Lavander oil",
+  //     price: "234$",
+  //     image: "some_image",
+  //     category: {
+  //       create: {
+  //         name: "OIL",
+  //       },
+  //     },
+  //   },
+  // });
   const manyProducts = await prisma.products.createMany({
     data: [
       {
@@ -184,30 +209,7 @@ async function main() {
     ],
     skipDuplicates: true,
   });
-  //ProductTypes
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const productTypes = await prisma.productTypes.createMany({
-    data: [
-      { name: "SCRUBS_AND_MASKS" },
-      { name: "NATURAL_DEODORANTS" },
-      { name: "HAIR_OILD_AND_SERUMS" },
-      { name: "SOLID_SHAMPOOS_AND_HAIR_SOAPS" },
-      { name: "EAU_DE_TOILETE" },
-    ],
-    skipDuplicates: true,
-  });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const tags = await prisma.tags.createMany({
-    data: [
-      { name: "VEGAN_COSMETICS" },
-      { name: "ORGANIC_COSMETICS" },
-      { name: "HANDMADE_COSMETICS" },
-      { name: "SUMMER_ESSENTIALS" },
-      { name: "GIFTS" },
-    ],
-    skipDuplicates: true,
-  });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const tagsOnProducts = await prisma.tagsOnProducts.createMany({
     data: [

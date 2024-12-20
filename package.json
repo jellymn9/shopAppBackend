@@ -4,21 +4,22 @@
   "description": "Backend for react shop app",
   "main": "dist/server.js",
   "prisma": {
-    "schema": "./src/prisma/schema.prisma"
+    "schema": "./src/prisma/schema.prisma",
+    "seed": "node ./dist/prisma/seeds/seed.js"
   },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
     "build-dev": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "ts-node src/server.ts",
+    "start-dev": "NODE_ENV=development ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
     "nodemon-start": "nodemon src/server.ts",
     "postinstall": "prisma generate",
     "seed-dev": "ts-node src/prisma/seeds/seed.ts",
     "migrate-dev": "npx prisma migrate dev",
-    "migrate-prod": "npx prisma migrate deploy",
-    "seed-prod": "node dist/src/prisma/seeds/seed.js"
+    "migrate-prod": "NODE_ENV=production prisma migrate deploy",
+    "seed-prod": "npx prisma db seed"
   },
   "author": "Jelena Mandzic",
   "license": "ISC",
