@@ -13,7 +13,7 @@ const getProducts = controllerWrapper(async (req: Request, res: Response) => {
     mapElementsToNumbers(skip as Array<string>),
     cursor && String(cursor)
   );
-  res.status(200).send({ products });
+  res.status(200).send({ ...products });
 });
 
 const getProduct = controllerWrapper(async (req: Request, res: Response) => {
