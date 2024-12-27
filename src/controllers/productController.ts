@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import productService from "../services/products";
+import productService from "../services/productsService";
 import { controllerWrapper } from "../utils/errorHandler";
 import { mapElementsToNumbers } from "../utils/helpers";
 
