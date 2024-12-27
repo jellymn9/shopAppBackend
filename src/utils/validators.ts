@@ -25,9 +25,6 @@ const userConstraints = {
 const productConstraints = {
   page: { numericality: { onlyInteger: true, greaterThan: 0 } },
   skipElements: { numericality: { onlyInteger: true } },
-  ids: {
-    presence: { allowEmpty: false, message: "^The 'ids' field is required." },
-  },
 };
 
 export const isInvalidIDs = function (ids: unknown) {
@@ -42,7 +39,6 @@ export const isInvalidIDs = function (ids: unknown) {
       message: "IDs can't be empty",
     };
   }
-  //return validate({ ids }, productConstraints);
 };
 
 export const isInvalidEmail = function (email: string) {
