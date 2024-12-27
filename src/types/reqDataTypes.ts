@@ -35,3 +35,7 @@ export interface DataMiddlewareI {
     dataSource?: "body" | "params" | "query"
   ): MiddlewareT;
 }
+
+export interface GetProductsBatch {
+  ids: Array<string>;
+}

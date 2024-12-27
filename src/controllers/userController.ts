@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { controllerWrapper } from "../utils/errorHandler";
-import userService from "../services/users";
+import userService from "../services/usersService";
 
 const registerUser = controllerWrapper(async (req: Request, res: Response) => {
   const { username, email, password } = req.body;

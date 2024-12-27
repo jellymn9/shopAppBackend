@@ -9,6 +9,7 @@ import {
   isInvalidPage,
   isInvalidSkip,
   isInvalidCursor,
+  isInvalidIDs,
 } from "../utils/validators";
 import { CustomError } from "../utils/errorHandler";
 import {
@@ -17,6 +18,7 @@ import {
   LoginUserI,
   GetProductI,
   GetProductsI,
+  GetProductsBatch,
 } from "../types/reqDataTypes";
 
 const dataMiddleware: DataMiddlewareI = (findError, dataSource = "body") => {
@@ -63,7 +65,12 @@ function getProducts({ isForward, page, skip, cursor }: GetProductsI) {
   );
 }
 
+function getProductsBatch({ ids }: GetProductsBatch) {
+  return isInvalidIDs(ids);
+}
+
 export const registerDataMiddleware = dataMiddleware(registerUserDataError);
 export const loginDataMiddleware = dataMiddleware(loginUser);
 export const getProductMiddleware = dataMiddleware(getProduct, "params");
 export const getProductsMiddleware = dataMiddleware(getProducts, "query");
+export const getProductsBatchMiddleware = dataMiddleware(getProductsBatch);
