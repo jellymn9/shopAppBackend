@@ -55,4 +55,14 @@ const readProduct = async (id: string) => {
   return product;
 };
 
-export default { readProducts, readProduct };
+const readProductsBatch = async (ids: Array<string>) => {
+  const getProducts = await prisma.products.findMany({
+    where: {
+      id: { in: ids },
+    },
+  });
+
+  return getProducts;
+};
+
+export default { readProducts, readProduct, readProductsBatch };

@@ -1,4 +1,4 @@
-import { isString, validate } from "validate.js";
+import { isString, isArray, validate } from "validate.js";
 import { validate as isValidUUID } from "uuid";
 
 const userConstraints = {
@@ -25,6 +25,24 @@ const userConstraints = {
 const productConstraints = {
   page: { numericality: { onlyInteger: true, greaterThan: 0 } },
   skipElements: { numericality: { onlyInteger: true } },
+  ids: {
+    presence: { allowEmpty: false, message: "^The 'ids' field is required." },
+  },
+};
+
+export const isInvalidIDs = function (ids: unknown) {
+  if (!ids) {
+    return { message: "^The 'ids' field is required." };
+  }
+  if (!isArray(ids)) {
+    return { message: "IDs must be array" };
+  }
+  if (Array.isArray(ids) && !ids.length) {
+    return {
+      message: "IDs can't be empty",
+    };
+  }
+  //return validate({ ids }, productConstraints);
 };
 
 export const isInvalidEmail = function (email: string) {

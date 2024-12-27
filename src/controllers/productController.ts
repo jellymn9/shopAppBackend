@@ -22,4 +22,12 @@ const getProduct = controllerWrapper(async (req: Request, res: Response) => {
   res.status(200).send({ product });
 });
 
-export default { getProducts, getProduct };
+const getProductsBatch = controllerWrapper(
+  async (req: Request, res: Response) => {
+    const { ids } = req.body;
+    const productsBatch = await productService.readProductsBatch(ids);
+    res.status(200).send({ data: productsBatch });
+  }
+);
+
+export default { getProducts, getProduct, getProductsBatch };
