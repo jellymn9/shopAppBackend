@@ -210,6 +210,21 @@ async function main() {
     skipDuplicates: true,
   });
 
+  const products = await prisma.products.findMany();
+
+  for (const product of products) {
+    // Remove dollar sign and convert to number
+    const numericPrice = parseInt(product.price.replace("$", ""), 10);
+
+    // Update the new priceInt column
+    await prisma.products.update({
+      where: { id: product.id },
+      data: { priceInt: numericPrice },
+    });
+  }
+
+  console.log("Price data cleaned and migrated to priceInt column.");
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const tagsOnProducts = await prisma.tagsOnProducts.createMany({
     data: [
