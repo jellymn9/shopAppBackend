@@ -26,7 +26,7 @@ const getProductsBatch = controllerWrapper(
   async (req: Request, res: Response) => {
     const { ids } = req.body;
     const productsBatch = await productService.readProductsBatch(ids);
-    res.status(200).send({ data: productsBatch });
+    res.status(200).send({ products: productsBatch });
   }
 );
 
