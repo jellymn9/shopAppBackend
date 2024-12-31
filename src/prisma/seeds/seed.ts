@@ -92,7 +92,7 @@ async function main() {
         image: "image_123",
         categoryName: "SOAP",
         productTypeName: "SOLID_SHAMPOOS_AND_HAIR_SOAPS",
-        priceInt: 45,
+        price: 45,
       },
       {
         id: "ae825c6e-daa8-4568-9117-b9473fa01f7d",
@@ -101,7 +101,7 @@ async function main() {
         image: "image_123",
         categoryName: "SOAP",
         productTypeName: "SCRUBS_AND_MASKS",
-        priceInt: 45,
+        price: 45,
       },
       {
         id: "08118746-82a3-43bc-9339-d13a1599dae7",
@@ -110,7 +110,7 @@ async function main() {
         image: "image_123",
         categoryName: "SOAP",
         productTypeName: "SCRUBS_AND_MASKS",
-        priceInt: 45,
+        price: 45,
       },
       {
         id: "ce88cfed-0343-4206-8d64-68b43059e209",
@@ -119,7 +119,7 @@ async function main() {
         image: "image_123",
         categoryName: "SOAP",
         productTypeName: "NATURAL_DEODORANTS",
-        priceInt: 45,
+        price: 45,
       },
       {
         id: "36ae2d93-9cfc-4fc1-ab33-4fc1eb0ad0ee",
@@ -128,7 +128,7 @@ async function main() {
         image: "image_123",
         categoryName: "FLORAL_WATER",
         productTypeName: "EAU_DE_TOILETE",
-        priceInt: 83,
+        price: 83,
       },
       {
         id: "0a5b82ed-0eba-4317-9b02-e685c2850887",
@@ -137,7 +137,7 @@ async function main() {
         image: "some_image",
         categoryName: "OIL",
         productTypeName: "HAIR_OILD_AND_SERUMS",
-        priceInt: 234,
+        price: 234,
       },
 
       {
@@ -147,7 +147,7 @@ async function main() {
         image: "some_image",
         categoryName: "CREAM",
         productTypeName: "SCRUBS_AND_MASKS",
-        priceInt: 200,
+        price: 200,
       },
       {
         id: "f8668301-8473-4184-a734-e6eb96545071",
@@ -156,7 +156,7 @@ async function main() {
         image: "some_image",
         categoryName: "FLORAL_WATER",
         productTypeName: "EAU_DE_TOILETE",
-        priceInt: 150,
+        price: 150,
       },
       {
         id: "3f29e67b-0195-4297-a5a3-8a991d53df38",
@@ -165,7 +165,7 @@ async function main() {
         image: "some_image",
         categoryName: "SOAP",
         productTypeName: "SOLID_SHAMPOOS_AND_HAIR_SOAPS",
-        priceInt: 120,
+        price: 120,
       },
       {
         id: "a1bbb0b8-0bda-4ca4-923a-5b016f4e0268",
@@ -174,7 +174,7 @@ async function main() {
         image: "some_image",
         categoryName: "OIL",
         productTypeName: "HAIR_OILD_AND_SERUMS",
-        priceInt: 180,
+        price: 180,
       },
       {
         id: "10e4086c-fcab-4112-a6b4-dd5d61cc47ec",
@@ -183,7 +183,7 @@ async function main() {
         image: "some_image",
         categoryName: "CREAM",
         productTypeName: "SCRUBS_AND_MASKS",
-        priceInt: 130,
+        price: 130,
       },
       {
         id: "65504f26-7f38-4f7b-a889-8d00b4f3c55f",
@@ -192,7 +192,7 @@ async function main() {
         image: "some_image",
         categoryName: "SOAP",
         productTypeName: "SOLID_SHAMPOOS_AND_HAIR_SOAPS",
-        priceInt: 140,
+        price: 140,
       },
       {
         id: "d07ecf1a-20f3-49db-a1ad-a61023c49379",
@@ -201,7 +201,7 @@ async function main() {
         image: "some_image",
         categoryName: "FLORAL_WATER",
         productTypeName: "EAU_DE_TOILETE",
-        priceInt: 190,
+        price: 190,
       },
       {
         id: "7b275400-4835-477e-a6b6-d333411bfa4e",
@@ -210,7 +210,7 @@ async function main() {
         image: "some_image",
         categoryName: "OIL",
         productTypeName: "EAU_DE_TOILETE",
-        priceInt: 240,
+        price: 240,
       },
       {
         id: "c0d5ef10-7722-4c73-a364-6db3cc3c59a6",
@@ -219,7 +219,7 @@ async function main() {
         image: "some_image",
         categoryName: "SOAP",
         productTypeName: "SOLID_SHAMPOOS_AND_HAIR_SOAPS",
-        priceInt: 225,
+        price: 225,
       },
     ],
     skipDuplicates: true,
