@@ -56,7 +56,6 @@ model ProductTypes {
 model Products {
   id        String   @id @db.Uuid
   name String
-  price String
   priceInt Int @default(0)
   image String
   category Categories @relation(fields:[categoryName], references: [name])
