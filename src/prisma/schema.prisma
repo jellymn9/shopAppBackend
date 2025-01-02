@@ -53,10 +53,18 @@ model ProductTypes {
   products Products[]
 }
 
+enum Currency {
+  USD
+  EUR
+  JPY
+  RSD
+}
+
 model Products {
   id        String   @id @db.Uuid
   name String
   price Int @default(0)
+  currency Currency @default(EUR)
   image String
   category Categories @relation(fields:[categoryName], references: [name])
   categoryName Category
