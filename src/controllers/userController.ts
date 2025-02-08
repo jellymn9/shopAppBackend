@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import { controllerWrapper } from "../utils/errorHandler";
 import userService from "../services/usersService";
 
+console.log("test");
+
 const registerUser = controllerWrapper(async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
