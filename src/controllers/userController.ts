@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { controllerWrapper } from "../utils/errorHandler";
 import userService from "../services/usersService";
 
-console.log("test");
+console.log("testt");
 
 const registerUser = controllerWrapper(async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
